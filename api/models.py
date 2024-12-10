@@ -10,6 +10,7 @@ class Student(models.Model):
     roll = models.IntegerField(unique=True)
     city = models.CharField(max_length = 100)
     is_deleted = models.BooleanField(default = False)
+    
 
     # @receiver(post_save, sender  = User) 
     # def create_student(sender , instance , created , **kwargs):

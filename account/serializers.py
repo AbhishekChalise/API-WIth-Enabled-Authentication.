@@ -20,6 +20,8 @@ class UserSerializer(serializers.ModelSerializer):
         ct = data.get('password2')
         if nm != ct:
             raise serializers.ValidationError('Idiot Both Password and Password2 must be same!!!!!')
+        email = data.get('email')
+    
         return data
         
     def create(self,validated_data):
