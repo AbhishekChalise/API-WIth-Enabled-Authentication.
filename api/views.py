@@ -7,9 +7,9 @@ from django.http import HttpResponse,JsonResponse
 from api.models import Student
 from .serializer import StudentSerializer
 import io
-from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+#from rest_framework import viewsets
+#from rest_framework.authentication import BasicAuthentication
+#from rest_framework.permissions import IsAuthenticated
 #from .cutompermission import MyPermission
 from api.serializer import UserLoginSerializer
 from django.contrib.auth import authenticate,login,logout
@@ -18,8 +18,9 @@ from rest_framework import status
 from account.models import User
 from api.renderers import UserJsonRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
+#from rest_framework.permissions import IsAuthenticated
 from api.serializer import UserChangePasswordSerializer
+#from Tokens.utils import create_custom_token , validate_custom_token
 
 # ACCESS_TOKEN_LIFETIME This token for the Access Lifetime ,
 # REFRESH_TOKEN_LIFETIME This token is for the process for refreshing the tokens.

@@ -76,6 +76,7 @@ from rest_framework import serializers
 from api.models import Student
 from account.models import User
 from account.serializers import UserSerializer
+from Tokens.utils import create_custom_token,validate_custom_token
 
 class StudentSerializer(serializers.ModelSerializer):
     # This helps us connect StudentSerializer and the UserSerializer in nested Fashion.
@@ -88,6 +89,7 @@ class StudentSerializer(serializers.ModelSerializer):
             if value >=200:
                 raise serializers.ValidationError('Seat Full')
             return value  
+        
         # Object Level Validation (We have implemented object level validation in the  )
         # def validate(self,data):
         #     nm = data.get('name')
@@ -128,8 +130,8 @@ class StudentSerializer(serializers.ModelSerializer):
         return student 
 
 
-from django.contrib.auth import authenticate
-from django.contrib.auth.hashers import make_password, check_password
+# from django.contrib.auth import authenticate
+# from django.contrib.auth.hashers import make_password, check_password
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length = 255) # Actually you need to specify this field becaues 
     # Since email is unique and 
@@ -167,6 +169,7 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes,smart_str,DjangoUnicodeDecodeError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from .utils import Util
+from Tokens.utils import create_custom_token , validate_custom_token
 class SendPasswordResetEmailSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length = 255)
     class Meta:
@@ -181,9 +184,9 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
             print("This is the base 64 encoded code:",urlsafe_base64_encode(force_bytes(user.id)))
             uid = urlsafe_base64_encode(force_bytes(user.id))
             print("Encoded UID",uid)
-            token = PasswordResetTokenGenerator().make_token(user)
+            token = create_custom_token(user)
             print("Password Reset Token:",token)
-            link = 'http://localhost:3000/api/user/reset/'+ uid + '/' +token
+            link = 'http://127.0.0.1:8000/studentapi/user-password-reset-view/'+ uid + '/' + str(token)
             print("password Reset Link",link)
             # send Email
             body = 'Click the following link to Reset the Password:' + link
@@ -238,6 +241,10 @@ class UserResetPasswordSerializer(serializers.Serializer):
           raise serializers.ValidationError('Token is not Valid or Expired!!!')
       
       
+# class UserSendRegistrationEmail(serializers.Serializer):
+#     email = serializers.EmailField(max_length = 255)
+#     class Meta:
+
 
 
 

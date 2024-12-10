@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "corsheaders",
     "account",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "Tokens"
 ]
 
 MIDDLEWARE = [
@@ -86,8 +87,8 @@ AUTH_USER_MODEL = 'account.User'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_USER')
+EMAIL_HOST_USER = "abhishekchalise80@gmail.com"
+EMAIL_HOST_PASSWORD = 'opqt lewb jqpd yyuz'
 EMAIL_USE_TLS = True
 
 # Database
